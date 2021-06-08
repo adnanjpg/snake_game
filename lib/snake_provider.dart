@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'consts.dart';
 import 'cube_model.dart';
 import 'direction_enum.dart';
 
@@ -8,12 +9,17 @@ class SnakeProvider extends ChangeNotifier {
   List<CubeModel> _cubes = [];
   List<CubeModel> get cubes {
     if (_cubes.length == 0) generateNew();
+
     return _cubes;
   }
 
   bool get eatingItsTail {
-    return _cubes.any(
-        (element) => element.y == _cubes.last.y || element.x == _cubes.last.x);
+    bool eat = false;
+    for (var i = 0; i < _cubes.length - 1; i++) {
+      eat = _cubes[i].y == _cubes.last.y && _cubes[i].x == _cubes.last.x;
+      if (eat) break;
+    }
+    return eat;
   }
 
   bool get gameOver => eatingItsTail || _cubes.last.isOutOfBounds;
@@ -24,7 +30,7 @@ class SnakeProvider extends ChangeNotifier {
   }
 
   void generateNew() {
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < initSnakeSize; i++) {
       _cubes.add(
         CubeModel.snake(i + 3, 5),
       );

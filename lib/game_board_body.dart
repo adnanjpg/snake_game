@@ -26,14 +26,9 @@ class _GameBoardBodyState extends State<GameBoardBody> {
       Timer.periodic(
         Duration(milliseconds: 10),
         (_) {
-          Direction assignRand() {
-            Direction? dir;
-            int randNum = rand.nextInt(Direction.values.length);
-            dir = Direction.values[randNum];
-            return dir;
-          }
+          int randNum = rand.nextInt(Direction.values.length);
+          SnakeProvider.direction = Direction.values[randNum];
 
-          SnakeProvider.direction = assignRand();
           w.forward();
 
           if (w.gameOver) {
@@ -45,8 +40,8 @@ class _GameBoardBodyState extends State<GameBoardBody> {
                 );
               },
             );
+            _.cancel();
           }
-          _.cancel();
         },
       );
     });
