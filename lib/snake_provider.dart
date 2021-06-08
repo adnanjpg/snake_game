@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'consts.dart';
 import 'cube_model.dart';
 import 'direction_enum.dart';
 
@@ -12,10 +11,15 @@ class SnakeProvider extends ChangeNotifier {
     return _cubes;
   }
 
+  bool gonFallOffEdge(Direction dir) {
+    CubeModel mod = CubeModel.afterMove(CubeModel.from(_cubes.last), dir);
+    return mod.isOutOfBounds;
+  }
+
   void generateNew() {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 6; i++) {
       _cubes.add(
-        CubeModel(i + 3, 5, snakeCubeColor),
+        CubeModel.snake(i + 3, 5),
       );
     }
   }

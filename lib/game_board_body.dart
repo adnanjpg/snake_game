@@ -21,12 +21,25 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   @override
   void initState() {
     w = Provider.of<SnakeProvider>(context, listen: false);
+    Random rand = Random.secure();
     Future.microtask(() {
       Timer.periodic(
-        Duration(seconds: 2),
+        Duration(milliseconds: 10),
         (_) {
-          SnakeProvider.direction = Direction
-              .values[Random.secure().nextInt(Direction.values.length)];
+          Direction assignRand() {
+            Direction? dir;
+            while (true) {
+              int randNum = rand.nextInt(Direction.values.length);
+
+              dir = Direction.values[randNum];
+              if (!w.gonFallOffEdge(dir)) {
+                break;
+              }
+            }
+            return dir;
+          }
+
+          SnakeProvider.direction = assignRand();
           w.forward();
         },
       );
@@ -65,11 +78,11 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   Widget bg() {
     return Column(
       children: List.generate(
-        boardSize,
+        boardSizeY,
         (y) => Row(
           children: List.generate(
-            boardSize,
-            (x) => CubeModel(x, y, bgCubeColor).cube(),
+            boardSizeX,
+            (x) => CubeModel.bgCube(x, y).cube(),
           ),
         ),
       ),
