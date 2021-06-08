@@ -28,19 +28,25 @@ class _GameBoardBodyState extends State<GameBoardBody> {
         (_) {
           Direction assignRand() {
             Direction? dir;
-            while (true) {
-              int randNum = rand.nextInt(Direction.values.length);
-
-              dir = Direction.values[randNum];
-              if (!w.gonFallOffEdge(dir)) {
-                break;
-              }
-            }
+            int randNum = rand.nextInt(Direction.values.length);
+            dir = Direction.values[randNum];
             return dir;
           }
 
           SnakeProvider.direction = assignRand();
           w.forward();
+
+          if (w.gameOver) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('game over haha'),
+                );
+              },
+            );
+          }
+          _.cancel();
         },
       );
     });

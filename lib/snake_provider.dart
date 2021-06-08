@@ -11,6 +11,13 @@ class SnakeProvider extends ChangeNotifier {
     return _cubes;
   }
 
+  bool get eatingItsTail {
+    return _cubes.any(
+        (element) => element.y == _cubes.last.y || element.x == _cubes.last.x);
+  }
+
+  bool get gameOver => eatingItsTail || _cubes.last.isOutOfBounds;
+
   bool gonFallOffEdge(Direction dir) {
     CubeModel mod = CubeModel.afterMove(CubeModel.from(_cubes.last), dir);
     return mod.isOutOfBounds;
@@ -34,7 +41,8 @@ class SnakeProvider extends ChangeNotifier {
     for (var i = 0; i < _cubes.length - 1; i++) {
       _cubes[i].copyFrom(_cubes[i + 1]);
     }
-    _cubes[_cubes.length - 1].move();
+    _cubes.last.move();
+
     notifyListeners();
   }
 }
