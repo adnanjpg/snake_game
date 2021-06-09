@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'direction_enum.dart';
 import 'snake_provider.dart';
 import 'consts.dart';
 import 'cube_model.dart';
@@ -21,14 +19,11 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   @override
   void initState() {
     w = Provider.of<SnakeProvider>(context, listen: false);
-    Random rand = Random.secure();
+    // Random rand = Random.secure();
     Future.microtask(() {
       Timer.periodic(
-        Duration(milliseconds: 10),
+        Duration(milliseconds: 1000),
         (_) {
-          int randNum = rand.nextInt(Direction.values.length);
-          SnakeProvider.direction = Direction.values[randNum];
-
           w.forward();
 
           if (w.gameOver) {

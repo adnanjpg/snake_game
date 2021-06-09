@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'consts.dart';
 import 'cube.dart';
+import 'main.dart';
 import 'snake_provider.dart';
 import 'direction_enum.dart';
 
@@ -58,7 +60,12 @@ class CubeModel {
   }
 
   void move() {
-    CubeModel mod = afterMove(this, SnakeProvider.direction);
-    this.copyFrom(mod);
+    final BuildContext? context = navKey.currentContext;
+    if (context != null) {
+      final SnakeProvider prov =
+          Provider.of<SnakeProvider>(context, listen: false);
+      CubeModel mod = afterMove(this, prov.nextDirection);
+      this.copyFrom(mod);
+    }
   }
 }
