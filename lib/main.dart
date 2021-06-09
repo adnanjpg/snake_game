@@ -36,6 +36,7 @@ class _GameBoardState extends State<GameBoard> {
   @override
   void initState() {
     prov = Provider.of<SnakeProvider>(context, listen: false);
+    prov.setDefaults();
     super.initState();
   }
 

@@ -19,23 +19,38 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   @override
   void initState() {
     w = Provider.of<SnakeProvider>(context, listen: false);
-    // Random rand = Random.secure();
+    bool pause = false;
     Future.microtask(() {
       Timer.periodic(
         Duration(milliseconds: 1000),
         (_) {
-          w.forward();
+          if (!pause) {
+            w.forward();
+            if (w.gameOver) {
+              pause = true;
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('game over haha'),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // for some reason [Navigator.of(context).pop()]
+                          // did not wanna pop??
+                          Navigator.of(context, rootNavigator: true)
+                              .popUntil((route) => route.isFirst);
 
-          if (w.gameOver) {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text('game over haha'),
-                );
-              },
-            );
-            _.cancel();
+                          w.generateNew();
+                          pause = false;
+                        },
+                        child: Text('restart??'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
           }
         },
       );

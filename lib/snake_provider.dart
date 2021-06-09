@@ -5,6 +5,12 @@ import 'cube_model.dart';
 import 'direction_enum.dart';
 
 class SnakeProvider extends ChangeNotifier {
+  setDefaults() {
+    _cubes = [];
+    _direction = Direction.right;
+    _nextDirections = [];
+  }
+
   void addDirection(Direction d) {
     if (_nextDirections.length == 0 // if hasn't
         // had any instructions yet, or finished
@@ -25,7 +31,7 @@ class SnakeProvider extends ChangeNotifier {
     return _direction;
   }
 
-  Direction _direction = Direction.right;
+  late Direction _direction;
   List<CubeModel> _cubes = [];
   List<CubeModel> get cubes {
     if (_cubes.length == 0) generateNew();
@@ -50,11 +56,13 @@ class SnakeProvider extends ChangeNotifier {
   }
 
   void generateNew() {
+    setDefaults();
     for (var i = 0; i < initSnakeSize; i++) {
       _cubes.add(
         CubeModel.snake(i + 3, 5),
       );
     }
+    notifyListeners();
   }
 
   void add(CubeModel value) {
