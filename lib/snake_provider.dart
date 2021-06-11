@@ -62,7 +62,13 @@ class SnakeProvider extends ChangeNotifier {
         CubeModel.snake(i + 3, 5),
       );
     }
-    notifyListeners();
+    // this method will run during build,
+    // and it will throw an error,
+    // so we safely await for the build
+    // to finish.
+    Future.microtask(() {
+      notifyListeners();
+    });
   }
 
   void add(CubeModel value) {
