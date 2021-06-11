@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'game_state.dart';
 import 'consts.dart';
 import 'ui/cube.dart';
-import 'main.dart';
 import 'snake_provider.dart';
 import 'direction_enum.dart';
 
@@ -60,7 +60,7 @@ class CubeModel {
   }
 
   void move() {
-    final BuildContext? context = navKey.currentContext;
+    final BuildContext? context = GameState.navKey.currentContext;
     if (context != null) {
       final SnakeProvider prov =
           Provider.of<SnakeProvider>(context, listen: false);

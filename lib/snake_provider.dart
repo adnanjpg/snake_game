@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snake_game/game_state.dart';
 
+import 'game_state.dart';
 import 'consts.dart';
 import 'cube_model.dart';
 import 'direction_enum.dart';
