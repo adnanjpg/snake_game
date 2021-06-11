@@ -5,8 +5,10 @@ import 'consts.dart';
 
 class Cube extends StatelessWidget {
   final CubeModel model;
-  const Cube(this.model);
 
+  /// for the head of the snake
+  final Color? color;
+  const Cube(this.model, {this.color});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +18,7 @@ class Cube extends StatelessWidget {
         border: Border.all(
           width: borderWidth,
         ),
-        color: model.color,
+        color: color ?? model.color,
       ),
     );
   }

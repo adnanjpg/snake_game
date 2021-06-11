@@ -29,7 +29,7 @@ class CubeModel {
   bool get isOutOfBounds =>
       x.isNegative || y.isNegative || x >= boardSizeX || y >= boardSizeY;
 
-  Cube cube() => Cube(this);
+  Cube cube({Color? color}) => Cube(this, color: color);
 
   void copyFrom(CubeModel other) {
     x = other.x;

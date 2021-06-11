@@ -79,15 +79,21 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   }
 
   List<Widget> snk(List<CubeModel> cubes) {
-    return cubes
-        .map(
-          (e) => Positioned(
-            left: e.x * size,
-            top: e.y * size,
-            child: e.cube(),
-          ),
-        )
-        .toList();
+    return cubes.map(
+      (e) {
+        Color? clr;
+        // if it's the last element,
+        // which means the sanke's head
+        if (cubes.last == e) {
+          clr = snakeHeadColor;
+        }
+        return Positioned(
+          left: e.x * size,
+          top: e.y * size,
+          child: e.cube(color: clr),
+        );
+      },
+    ).toList();
   }
 
   Widget bg() {
