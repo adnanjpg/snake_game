@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'snake_provider.dart';
-import 'consts.dart';
-import 'cube_model.dart';
+import '../game_state.dart';
+import '../snake_provider.dart';
+import '../consts.dart';
+import '../cube_model.dart';
+import 'game_over_dialog.dart';
 
 class GameBoardBody extends StatefulWidget {
   const GameBoardBody({Key? key}) : super(key: key);
@@ -19,33 +21,14 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   @override
   void initState() {
     w = Provider.of<SnakeProvider>(context, listen: false);
-    bool pause = false;
     task(Timer _) {
-      if (!pause) {
+      if (!GameState.paused) {
         w.forward();
         if (w.gameOver) {
-          pause = true;
+          GameState.paused = true;
           showDialog(
             context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text('game over haha'),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // for some reason [Navigator.of(context).pop()]
-                      // did not wanna pop??
-                      Navigator.of(context, rootNavigator: true)
-                          .popUntil((route) => route.isFirst);
-
-                      w.generateNew();
-                      pause = false;
-                    },
-                    child: Text('restart??'),
-                  ),
-                ],
-              );
-            },
+            builder: (context) => GameOverDialog(),
           );
         }
       }

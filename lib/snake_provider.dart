@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snake_game/game_state.dart';
 
 import 'consts.dart';
 import 'cube_model.dart';
@@ -56,12 +57,14 @@ class SnakeProvider extends ChangeNotifier {
   }
 
   void generateNew() {
+    GameState.paused = true;
     setDefaults();
     for (var i = 0; i < initSnakeSize; i++) {
       _cubes.add(
         CubeModel.snake(i + 3, 5),
       );
     }
+    GameState.paused = false;
     // this method will run during build,
     // and it will throw an error,
     // so we safely await for the build

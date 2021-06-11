@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'direction_enum.dart';
-import 'game_board_body.dart';
+import 'ui/game_board_body.dart';
 import 'snake_provider.dart';
 
 void main() {
