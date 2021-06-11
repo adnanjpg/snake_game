@@ -19,7 +19,6 @@ class SnakeProvider extends ChangeNotifier {
         ||
         _nextDirections.last != d) {
       _nextDirections.add(d);
-      print(d);
     }
   }
 
