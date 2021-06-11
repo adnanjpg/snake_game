@@ -20,41 +20,45 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   void initState() {
     w = Provider.of<SnakeProvider>(context, listen: false);
     bool pause = false;
-    Future.microtask(() {
-      Timer.periodic(
-        Duration(milliseconds: 1000),
-        (_) {
-          if (!pause) {
-            w.forward();
-            if (w.gameOver) {
-              pause = true;
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('game over haha'),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          // for some reason [Navigator.of(context).pop()]
-                          // did not wanna pop??
-                          Navigator.of(context, rootNavigator: true)
-                              .popUntil((route) => route.isFirst);
+    task(Timer _) {
+      if (!pause) {
+        w.forward();
+        if (w.gameOver) {
+          pause = true;
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('game over haha'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // for some reason [Navigator.of(context).pop()]
+                      // did not wanna pop??
+                      Navigator.of(context, rootNavigator: true)
+                          .popUntil((route) => route.isFirst);
 
-                          w.generateNew();
-                          pause = false;
-                        },
-                        child: Text('restart??'),
-                      ),
-                    ],
-                  );
-                },
+                      w.generateNew();
+                      pause = false;
+                    },
+                    child: Text('restart??'),
+                  ),
+                ],
               );
-            }
-          }
-        },
-      );
-    });
+            },
+          );
+        }
+      }
+    }
+
+    Future.microtask(
+      () {
+        Timer.periodic(
+          Duration(milliseconds: 1000),
+          task,
+        );
+      },
+    );
 
     super.initState();
   }
