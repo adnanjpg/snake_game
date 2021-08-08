@@ -39,7 +39,7 @@ class _GameBoardBodyState extends State<GameBoardBody> {
     Future.microtask(
       () {
         Timer.periodic(
-          Duration(milliseconds: 1000),
+          Duration(microseconds: 450000 - (10000 * speed)),
           task,
         );
       },

@@ -6,3 +6,5 @@ const Color bgCubeColor = Colors.green,
     snakeCubeColor = Colors.red,
     snakeHeadColor = Colors.blue;
 const initSnakeSize = 6;
+
+int speed = 5;
