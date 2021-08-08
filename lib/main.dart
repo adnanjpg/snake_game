@@ -15,6 +15,7 @@ class SnakeGame extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => SnakeProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         navigatorKey: GameState.navKey,
         home: GameBoard(),
       ),
