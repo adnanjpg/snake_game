@@ -62,13 +62,13 @@ class _GameBoardBodyState extends State<GameBoardBody> {
               // i have no idea why, but `arrowUp` and `arrowDown`
               // each represent its exact reverse
               if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
-                prov.addDirection(Direction.down);
+                prov.setDirection(Direction.down);
               } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
-                prov.addDirection(Direction.up);
+                prov.setDirection(Direction.up);
               } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
-                prov.addDirection(Direction.right);
+                prov.setDirection(Direction.right);
               } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
-                prov.addDirection(Direction.left);
+                prov.setDirection(Direction.left);
               }
             }
           },

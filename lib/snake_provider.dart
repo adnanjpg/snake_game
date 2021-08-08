@@ -8,33 +8,20 @@ import 'direction_enum.dart';
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
     _cubes = [];
-    _direction = Direction.right;
-    _nextDirections = [];
+    nextDirection = Direction.right;
   }
 
-  void addDirection(Direction direction) {
-    if (_nextDirections.length == 0 // if hasn't
-        // had any instructions yet, or finished
-        // all previoues instructions
-        ||
-        _nextDirections.last != direction) {
-      _nextDirections.add(direction);
-    }
-  }
+  void setDirection(Direction direction) => nextDirection = direction;
 
-  List<Direction> _nextDirections = [];
-  Direction get nextDirection {
-    if (_nextDirections.length > 0) {
-      _direction = _nextDirections[0];
-      _nextDirections.removeAt(0);
-    }
-    return _direction;
-  }
+  Direction nextDirection = Direction.right;
 
-  late Direction _direction;
+  // Direction get nextDirection => _nextDirection;
+
   List<CubeModel> _cubes = [];
   List<CubeModel> get cubes {
-    if (_cubes.length == 0) generateNew();
+    if (_cubes.length == 0) {
+      generateNew();
+    }
 
     return _cubes;
   }
