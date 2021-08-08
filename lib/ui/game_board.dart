@@ -25,6 +25,7 @@ class _GameBoardState extends State<GameBoard> {
       body: SafeArea(
         child: Stack(
           children: [
+            // TODO: center this
             GameBoardBody(),
             RestartButton(),
           ],

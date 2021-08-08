@@ -75,6 +75,7 @@ class _GameBoardBodyState extends State<GameBoardBody> {
           autofocus: true,
           child: Stack(
             children: [
+              Container(color: dangerAreaColor),
               child!,
               ...snake(val.cubes),
             ],

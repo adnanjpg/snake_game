@@ -7,6 +7,15 @@ import 'direction_enum.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
+    () {
+      final querySize =
+          MediaQuery.of(GameState.navKey.currentContext! /* TODO */).size;
+      final height = querySize.height;
+      final width = querySize.width;
+      final _outSize = size + borderWidth * 2;
+      boardSizeX = width ~/ _outSize;
+      boardSizeY = height ~/ _outSize;
+    }();
     _cubes = [];
     nextDirection = Direction.right;
   }
