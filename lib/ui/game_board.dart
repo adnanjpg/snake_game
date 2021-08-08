@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'game_board_body.dart';
+import 'restart_button.dart';
 import '../direction_enum.dart';
 import '../snake_provider.dart';
 
@@ -71,7 +72,12 @@ class _GameBoardState extends State<GameBoard> {
       onPanUpdate: onUpdate,
       child: Scaffold(
         body: SafeArea(
-          child: GameBoardBody(),
+          child: Stack(
+            children: [
+              GameBoardBody(),
+              RestartButton(),
+            ],
+          ),
         ),
       ),
     );
