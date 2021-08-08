@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../direction_enum.dart';
 import '../game_state.dart';
 import '../snake_provider.dart';
 import '../consts.dart';
@@ -17,14 +19,14 @@ class GameBoardBody extends StatefulWidget {
 }
 
 class _GameBoardBodyState extends State<GameBoardBody> {
-  late SnakeProvider w;
+  late SnakeProvider prov;
   @override
   void initState() {
-    w = Provider.of<SnakeProvider>(context, listen: false);
-    task(Timer _) {
+    prov = Provider.of<SnakeProvider>(context, listen: false);
+    task(_) {
       if (!GameState.paused) {
-        w.forward();
-        if (w.gameOver) {
+        prov.forward();
+        if (prov.gameOver) {
           GameState.paused = true;
           showDialog(
             context: context,
@@ -50,30 +52,52 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   Widget build(BuildContext context) {
     return Consumer<SnakeProvider>(
       builder: (context, val, child) {
-        return Stack(
-          children: [
-            child!,
-            ...snk(val.cubes),
-          ],
+        return RawKeyboardListener(
+          focusNode: FocusNode(),
+          onKey: (event) {
+            // this method gets called on key up and down,
+            // but we only want to work it on key down.
+            // https://stackoverflow.com/a/50986257/12555423
+            if (event.runtimeType == RawKeyDownEvent) {
+              // i have no idea why, but `arrowUp` and `arrowDown`
+              // each represent its exact reverse
+              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
+                prov.addDirection(Direction.down);
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
+                prov.addDirection(Direction.up);
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+                prov.addDirection(Direction.right);
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
+                prov.addDirection(Direction.left);
+              }
+            }
+          },
+          autofocus: true,
+          child: Stack(
+            children: [
+              child!,
+              ...snake(val.cubes),
+            ],
+          ),
         );
       },
       child: bg(),
     );
   }
 
-  List<Widget> snk(List<CubeModel> cubes) {
+  List<Widget> snake(List<CubeModel> cubes) {
     return cubes.map(
-      (e) {
+      (model) {
         Color? clr;
         // if it's the last element,
         // which means the sanke's head
-        if (cubes.last == e) {
+        if (cubes.last == model) {
           clr = snakeHeadColor;
         }
         return Positioned(
-          left: e.x * size,
-          top: e.y * size,
-          child: e.cube(color: clr),
+          left: model.x * size,
+          top: model.y * size,
+          child: model.cube(color: clr),
         );
       },
     ).toList();

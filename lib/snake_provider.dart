@@ -12,13 +12,13 @@ class SnakeProvider extends ChangeNotifier {
     _nextDirections = [];
   }
 
-  void addDirection(Direction d) {
+  void addDirection(Direction direction) {
     if (_nextDirections.length == 0 // if hasn't
         // had any instructions yet, or finished
         // all previoues instructions
         ||
-        _nextDirections.last != d) {
-      _nextDirections.add(d);
+        _nextDirections.last != direction) {
+      _nextDirections.add(direction);
     }
   }
 

@@ -62,10 +62,9 @@ class CubeModel {
   void move() {
     final BuildContext? context = GameState.navKey.currentContext;
     if (context != null) {
-      final SnakeProvider prov =
-          Provider.of<SnakeProvider>(context, listen: false);
-      CubeModel mod = afterMove(this, prov.nextDirection);
-      this.copyFrom(mod);
+      final prov = Provider.of<SnakeProvider>(context, listen: false);
+      final model = afterMove(this, prov.nextDirection);
+      this.copyFrom(model);
     }
   }
 }
