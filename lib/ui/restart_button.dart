@@ -11,7 +11,7 @@ class RestartButton extends StatelessWidget {
       right: 0,
       top: 0,
       child: IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.restart_alt,
         ),
         onPressed: () {

@@ -7,10 +7,12 @@ import 'ui/game_board.dart';
 import 'utils/game_state.dart';
 
 void main() {
-  runApp(SnakeGame());
+  runApp(const SnakeGame());
 }
 
 class SnakeGame extends StatelessWidget {
+  const SnakeGame({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,7 +23,7 @@ class SnakeGame extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: GameState.navKey,
-        home: GameBoard(),
+        home: const GameBoard(),
       ),
     );
   }

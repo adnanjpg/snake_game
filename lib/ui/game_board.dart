@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../utils/game_state.dart';
 
+import '../utils/game_state.dart';
 import 'game_board_body.dart';
 import 'restart_button.dart';
-import '../providers/snake_provider.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({Key? key}) : super(key: key);
@@ -26,7 +24,7 @@ class _GameBoardState extends State<GameBoard> {
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [
+          children: const [
             // TODO: center this
             GameBoardBody(),
             RestartButton(),

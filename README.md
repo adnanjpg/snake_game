@@ -6,6 +6,8 @@
 - dynamic color schemes
 - init lints
 - the background should be full screen 
+- translations (maybe)
+- write tests (maybe)
 
 ## 😏 DONE List 
 - add points that snake eats, and increase snake length and speed 

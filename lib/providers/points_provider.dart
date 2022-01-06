@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:snake_game/utils/consts.dart';
 
 import '../models/cube_model.dart';
+import '../utils/consts.dart';
 
 class PointsProvider extends ChangeNotifier {
   final List<CubeModel> _list = [CubeModel.point(0, 0)];
@@ -11,7 +11,9 @@ class PointsProvider extends ChangeNotifier {
   void setDefaults() {
     clear();
 
-    for (var i = 0; i < 2; i++) addRandom();
+    for (var i = 0; i < 2; i++) {
+      addRandom();
+    }
   }
 
   List<CubeModel> get list => _list;

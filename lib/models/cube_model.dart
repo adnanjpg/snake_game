@@ -83,7 +83,7 @@ class CubeModel {
 
     final model = afterMove(this, prov.nextDirection);
 
-    this.copyFrom(model);
+    copyFrom(model);
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snake_game/providers/points_provider.dart';
+import 'points_provider.dart';
 
 import '../utils/game_state.dart';
 import '../utils/consts.dart';
@@ -34,7 +34,7 @@ class SnakeProvider extends ChangeNotifier {
 
   List<CubeModel> _cubes = [];
   List<CubeModel> get cubes {
-    if (_cubes.length == 0) {
+    if (_cubes.isEmpty) {
       generateNew();
     }
 
@@ -88,7 +88,9 @@ class SnakeProvider extends ChangeNotifier {
   static CubeModel prevFirst = CubeModel(0, 0, Colors.red);
 
   void forward() {
-    if (_cubes.length == 0) generateNew();
+    if (_cubes.isEmpty) {
+      generateNew();
+    }
 
     // saving the previous position of the first cube (aka the tail),
     // so we can add it to the tail later.
@@ -106,7 +108,6 @@ class SnakeProvider extends ChangeNotifier {
     final matches = points.matches(last);
     if (matches) {
       addToTail();
-      print('ateee');
     }
 
     notifyListeners();

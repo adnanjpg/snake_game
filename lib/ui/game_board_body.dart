@@ -32,7 +32,9 @@ class _GameBoardBodyState extends State<GameBoardBody> {
           GameState.paused = true;
           showDialog(
             context: context,
-            builder: (context) => GameOverDialog(),
+            builder: (context) {
+              return const GameOverDialog();
+            },
           );
         }
       }
@@ -63,14 +65,15 @@ class _GameBoardBodyState extends State<GameBoardBody> {
             if (event.runtimeType == RawKeyDownEvent) {
               // i have no idea why, but `arrowUp` and `arrowDown`
               // each represent its exact reverse
-              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp))
+              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
                 prov.setDirection(Direction.down);
-              else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown))
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
                 prov.setDirection(Direction.up);
-              else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight))
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
                 prov.setDirection(Direction.right);
-              else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft))
+              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
                 prov.setDirection(Direction.left);
+              }
             }
           },
           autofocus: true,
@@ -86,7 +89,7 @@ class _GameBoardBodyState extends State<GameBoardBody> {
         children: [
           Container(color: dangerAreaColor),
           const GameBoardBackground(),
-          PointsBody(),
+          const PointsBody(),
         ],
       ),
     );
