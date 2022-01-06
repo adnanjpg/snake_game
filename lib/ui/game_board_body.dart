@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../direction_enum.dart';
+import 'game_over_dialog.dart';
+import 'game_board_background.dart';
+import '../enums/direction_enum.dart';
 import '../game_state.dart';
 import '../snake_provider.dart';
 import '../consts.dart';
 import '../cube_model.dart';
-import 'game_over_dialog.dart';
 
 class GameBoardBody extends StatefulWidget {
   const GameBoardBody({Key? key}) : super(key: key);
@@ -61,15 +62,14 @@ class _GameBoardBodyState extends State<GameBoardBody> {
             if (event.runtimeType == RawKeyDownEvent) {
               // i have no idea why, but `arrowUp` and `arrowDown`
               // each represent its exact reverse
-              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
+              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp))
                 prov.setDirection(Direction.down);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
+              else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown))
                 prov.setDirection(Direction.up);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
+              else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight))
                 prov.setDirection(Direction.right);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
+              else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft))
                 prov.setDirection(Direction.left);
-              }
             }
           },
           autofocus: true,
@@ -82,7 +82,7 @@ class _GameBoardBodyState extends State<GameBoardBody> {
           ),
         );
       },
-      child: bg(),
+      child: GameBoardBackground(),
     );
   }
 
@@ -96,25 +96,11 @@ class _GameBoardBodyState extends State<GameBoardBody> {
           clr = snakeHeadColor;
         }
         return Positioned(
-          left: model.x * size,
-          top: model.y * size,
+          left: model.x * cubeSize,
+          top: model.y * cubeSize,
           child: model.cube(color: clr),
         );
       },
     ).toList();
-  }
-
-  Widget bg() {
-    return Column(
-      children: List.generate(
-        boardSizeY,
-        (y) => Row(
-          children: List.generate(
-            boardSizeX,
-            (x) => CubeModel.bgCube(x, y).cube(),
-          ),
-        ),
-      ),
-    );
   }
 }

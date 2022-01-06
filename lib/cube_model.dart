@@ -5,19 +5,23 @@ import 'game_state.dart';
 import 'consts.dart';
 import 'ui/cube.dart';
 import 'snake_provider.dart';
-import 'direction_enum.dart';
+import 'enums/direction_enum.dart';
 
 class CubeModel {
   int x, y;
+
   Color color;
+
   CubeModel(
     this.x,
     this.y,
     this.color,
   );
+
   factory CubeModel.snake(int x, int y) {
     return CubeModel(x, y, snakeCubeColor);
   }
+
   factory CubeModel.bgCube(int x, int y) {
     return CubeModel(x, y, bgCubeColor);
   }
@@ -26,10 +30,12 @@ class CubeModel {
     return CubeModel(0, 0, Colors.amber)..copyFrom(model);
   }
 
-  bool get isOutOfBounds =>
-      x.isNegative || y.isNegative || x >= boardSizeX || y >= boardSizeY;
-
   Cube cube({Color? color}) => Cube(this, color: color);
+
+  bool get _isOutOfBoundsX => x.isNegative || x >= boardSizeX;
+  bool get _isOutOfBoundsY => y.isNegative || y >= boardSizeY;
+
+  bool get isOutOfBounds => _isOutOfBoundsX || _isOutOfBoundsY;
 
   void copyFrom(CubeModel other) {
     x = other.x;
@@ -60,11 +66,10 @@ class CubeModel {
   }
 
   void move() {
-    final BuildContext? context = GameState.navKey.currentContext;
-    if (context != null) {
-      final prov = Provider.of<SnakeProvider>(context, listen: false);
-      final model = afterMove(this, prov.nextDirection);
-      this.copyFrom(model);
-    }
+    final prov = Provider.of<SnakeProvider>(GameState.context(), listen: false);
+
+    final model = afterMove(this, prov.nextDirection);
+
+    this.copyFrom(model);
   }
 }

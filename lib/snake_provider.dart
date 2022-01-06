@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 import 'game_state.dart';
 import 'consts.dart';
 import 'cube_model.dart';
-import 'direction_enum.dart';
+import 'enums/direction_enum.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
-    () {
-      final querySize =
-          MediaQuery.of(GameState.navKey.currentContext! /* TODO */).size;
+    {
+      final querySize = MediaQuery.of(GameState.context() /* TODO */).size;
       final height = querySize.height;
       final width = querySize.width;
-      final _outSize = size + borderWidth * 2;
+      final _outSize = cubeSize + borderWidth * 2;
       boardSizeX = width ~/ _outSize;
       boardSizeY = height ~/ _outSize;
-    }();
+    }
     _cubes = [];
     nextDirection = Direction.right;
   }
@@ -54,7 +53,7 @@ class SnakeProvider extends ChangeNotifier {
   void generateNew() {
     GameState.paused = true;
     setDefaults();
-    for (var i = 0; i < initSnakeSize; i++) {
+    for (var i = 0; i < initSnakeLen; i++) {
       _cubes.add(
         CubeModel.snake(i + 3, 5),
       );
