@@ -18,11 +18,6 @@ class CubeModel {
     this.color,
   );
 
-  CubeModel._()
-      : this.x = 0,
-        this.y = 0,
-        this.color = Colors.white;
-
   CubeModel.snake(this.x, this.y) : color = snakeCubeColor;
 
   CubeModel.bgCube(this.x, this.y) : color = bgCubeColor;

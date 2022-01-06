@@ -23,11 +23,16 @@ class PointsProvider extends ChangeNotifier {
   void addRandom() {
     final random = Random.secure();
 
-    final ranX = random.nextInt(boardSizeX), ranY = random.nextInt(boardSizeY);
+    var ranX = random.nextInt(boardSizeX), ranY = random.nextInt(boardSizeY);
 
-    final model = CubeModel.point(ranX, ranY);
+    if (_list.any((element) => element.x == ranX && element.y == ranY)) {
+      // keep recursing until we find a valid position
+      addRandom();
+    } else {
+      final model = CubeModel.point(ranX, ranY);
 
-    _add(model);
+      _add(model);
+    }
   }
 
   void removeAt(int x, int y) {

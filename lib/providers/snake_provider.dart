@@ -36,12 +36,13 @@ class SnakeProvider extends ChangeNotifier {
   }
 
   bool get eatingItsTail {
-    bool eat = false;
     for (var i = 0; i < _cubes.length - 1; i++) {
-      eat = _cubes[i].y == _cubes.last.y && _cubes[i].x == _cubes.last.x;
-      if (eat) break;
+      if (_cubes[i] == _cubes.last) {
+        return true;
+      }
     }
-    return eat;
+
+    return false;
   }
 
   bool get gameOver => eatingItsTail || _cubes.last.isOutOfBounds;
@@ -62,17 +63,22 @@ class SnakeProvider extends ChangeNotifier {
     GameState.paused = false;
   }
 
-  void add(CubeModel value) {
-    _cubes.add(value);
-    notifyListeners();
+  void addToTail() {
+    _cubes.insert(0, prevFirst);
   }
+
+  static CubeModel prevFirst = CubeModel(0, 0, Colors.red);
 
   void forward() {
     if (_cubes.length == 0) generateNew();
+
+    // saving the previous position of the first cube (aka the tail),
+    // so we can add it to the tail later.
+    prevFirst = CubeModel.from(_cubes.first);
+
     for (var i = 0; i < _cubes.length - 1; i++) {
       _cubes[i].copyFrom(_cubes[i + 1]);
     }
-
     final last = _cubes.last;
     last.move();
 
@@ -81,6 +87,7 @@ class SnakeProvider extends ChangeNotifier {
 
     final matches = points.matches(last);
     if (matches) {
+      addToTail();
       print('ateee');
     }
 
