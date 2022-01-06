@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:snake_game/providers/points_provider.dart';
 
 import '../utils/game_state.dart';
 import '../utils/consts.dart';
 import '../models/cube_model.dart';
 import '../enums/direction_enum.dart';
-import 'points_provider.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
@@ -72,7 +72,17 @@ class SnakeProvider extends ChangeNotifier {
     for (var i = 0; i < _cubes.length - 1; i++) {
       _cubes[i].copyFrom(_cubes[i + 1]);
     }
-    _cubes.last.move();
+
+    final last = _cubes.last;
+    last.move();
+
+    final points =
+        Provider.of<PointsProvider>(GameState.context(), listen: false);
+
+    final matches = points.matches(last);
+    if (matches) {
+      print('ateee');
+    }
 
     notifyListeners();
   }

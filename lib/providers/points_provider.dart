@@ -10,8 +10,8 @@ class PointsProvider extends ChangeNotifier {
 
   void setDefaults() {
     clear();
-    addRandom();
-    addRandom();
+
+    for (var i = 0; i < 2; i++) addRandom();
   }
 
   List<CubeModel> get list => _list;
@@ -30,9 +30,28 @@ class PointsProvider extends ChangeNotifier {
     _add(model);
   }
 
-  void remove(CubeModel cubeModel) {
-    _list.remove(cubeModel);
-    notifyListeners();
+  void removeAt(int x, int y) {
+    final idx = _list.indexWhere((cube) => cube.x == x && cube.y == y);
+
+    remove(idx);
+  }
+
+  void remove(int idx) {
+    if (idx >= 0 && idx < _list.length) _list.removeAt(idx);
+  }
+
+  bool matches(CubeModel cubeModel) {
+    final idx = _list.indexWhere((c) => c == cubeModel);
+
+    final match = idx != -1;
+
+    if (match) {
+      remove(idx);
+      addRandom();
+      notifyListeners();
+    }
+
+    return match;
   }
 
   void clear() {

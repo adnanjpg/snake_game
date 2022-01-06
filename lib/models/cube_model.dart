@@ -90,4 +90,15 @@ class CubeModel {
 
     this.copyFrom(model);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CubeModel &&
+          runtimeType == other.runtimeType &&
+          x == other.x &&
+          y == other.y;
+
+  @override
+  int get hashCode => x.hashCode ^ y.hashCode;
 }
