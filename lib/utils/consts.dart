@@ -12,7 +12,9 @@ const snakeInitX = 3, snakeInitY = 5;
 
 int boardSizeX = 12, boardSizeY = 12;
 
-int speed = 30;
+const initSpeed = 30;
+const speedIncrease = 2;
+int speed = initSpeed;
 
 const Direction initDirection = Direction.right;
 

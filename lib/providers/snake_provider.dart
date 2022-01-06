@@ -19,6 +19,8 @@ class SnakeProvider extends ChangeNotifier {
     }
 
     _cubes = [];
+    _increaseCount = 0;
+    speed = initSpeed;
     nextDirection = initDirection;
   }
 
@@ -81,7 +83,7 @@ class SnakeProvider extends ChangeNotifier {
     // and gets harder as the game progresses
     if (isPowerOf2(_increaseCount++)) {
       _cubes.insert(0, prevFirst);
-      speed += 2;
+      speed += speedIncrease;
     }
   }
 
