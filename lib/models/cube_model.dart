@@ -18,30 +18,44 @@ class CubeModel {
     this.color,
   );
 
-  factory CubeModel.snake(int x, int y) {
-    return CubeModel(x, y, snakeCubeColor);
+  CubeModel._()
+      : this.x = 0,
+        this.y = 0,
+        this.color = Colors.white;
+
+  CubeModel.snake(this.x, this.y) : color = snakeCubeColor;
+
+  CubeModel.bgCube(this.x, this.y) : color = bgCubeColor;
+
+  CubeModel.from(CubeModel other)
+      : x = other.x,
+        y = other.y,
+        color = other.color;
+
+  Cube cube() => Cube(this);
+
+  CubeModel copyWith({
+    int? x,
+    int? y,
+    Color? color,
+  }) {
+    return CubeModel(
+      x ?? this.x,
+      y ?? this.y,
+      color ?? this.color,
+    );
   }
-
-  factory CubeModel.bgCube(int x, int y) {
-    return CubeModel(x, y, bgCubeColor);
-  }
-
-  static CubeModel from(CubeModel model) {
-    return CubeModel(0, 0, Colors.amber)..copyFrom(model);
-  }
-
-  Cube cube({Color? color}) => Cube(this, color: color);
-
-  bool get _isOutOfBoundsX => x.isNegative || x >= boardSizeX;
-  bool get _isOutOfBoundsY => y.isNegative || y >= boardSizeY;
-
-  bool get isOutOfBounds => _isOutOfBoundsX || _isOutOfBoundsY;
 
   void copyFrom(CubeModel other) {
     x = other.x;
     y = other.y;
     color = other.color;
   }
+
+  bool get _isOutOfBoundsX => x.isNegative || x >= boardSizeX;
+  bool get _isOutOfBoundsY => y.isNegative || y >= boardSizeY;
+
+  bool get isOutOfBounds => _isOutOfBoundsX || _isOutOfBoundsY;
 
   static CubeModel afterMove(
     CubeModel model,

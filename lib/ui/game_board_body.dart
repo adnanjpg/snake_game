@@ -89,16 +89,16 @@ class _GameBoardBodyState extends State<GameBoardBody> {
   List<Widget> snake(List<CubeModel> cubes) {
     return cubes.map(
       (model) {
-        Color? clr;
         // if it's the last element,
         // which means the sanke's head
         if (cubes.last == model) {
-          clr = snakeHeadColor;
+          model = model.copyWith(color: snakeHeadColor);
         }
+
         return Positioned(
           left: model.x * cubeSize,
           top: model.y * cubeSize,
-          child: model.cube(color: clr),
+          child: model.cube(),
         );
       },
     ).toList();
