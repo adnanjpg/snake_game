@@ -63,7 +63,7 @@ class SnakeProvider extends ChangeNotifier {
     GameState.setDefaults();
     for (var i = 0; i < initSnakeLen; i++) {
       _cubes.add(
-        CubeModel.snake(i + 3, 5),
+        CubeModel.snake(i + snakeInitX, snakeInitY),
       );
     }
     GameState.paused = false;
@@ -88,18 +88,14 @@ class SnakeProvider extends ChangeNotifier {
   static CubeModel prevFirst = CubeModel(0, 0, Colors.red);
 
   void forward() {
-    if (_cubes.isEmpty) {
-      generateNew();
-    }
-
     // saving the previous position of the first cube (aka the tail),
     // so we can add it to the tail later.
-    prevFirst = CubeModel.from(_cubes.first);
+    prevFirst = CubeModel.from(cubes.first);
 
-    for (var i = 0; i < _cubes.length - 1; i++) {
-      _cubes[i].copyFrom(_cubes[i + 1]);
+    for (var i = 0; i < cubes.length - 1; i++) {
+      cubes[i].copyFrom(cubes[i + 1]);
     }
-    final last = _cubes.last;
+    final last = cubes.last;
     last.move();
 
     final points =

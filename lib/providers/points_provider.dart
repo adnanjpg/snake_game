@@ -6,20 +6,28 @@ import '../models/cube_model.dart';
 import '../utils/consts.dart';
 
 class PointsProvider extends ChangeNotifier {
-  final List<CubeModel> _list = [CubeModel.point(0, 0)];
+  final List<CubeModel> _list = [];
 
   void setDefaults() {
     clear();
 
-    for (var i = 0; i < 2; i++) {
-      addRandom();
-    }
+    fillRandom();
+
+    Future.microtask(() {
+      notifyListeners();
+    });
   }
 
   List<CubeModel> get list => _list;
 
   void _add(CubeModel cubeModel) {
     _list.add(cubeModel);
+  }
+
+  void fillRandom() {
+    while (_list.length < pointCount) {
+      addRandom();
+    }
   }
 
   void addRandom() {
@@ -54,7 +62,7 @@ class PointsProvider extends ChangeNotifier {
 
     if (match) {
       remove(idx);
-      addRandom();
+      fillRandom();
       notifyListeners();
     }
 

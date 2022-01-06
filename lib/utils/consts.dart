@@ -5,6 +5,11 @@ const double cubeSize = 30.0;
 const double borderWidth = 1.0;
 const int initSnakeLen = 6;
 
+/// the number of points existing at the same time
+const pointCount = 5;
+
+const snakeInitX = 3, snakeInitY = 5;
+
 int boardSizeX = 12, boardSizeY = 12;
 
 int speed = 30;
