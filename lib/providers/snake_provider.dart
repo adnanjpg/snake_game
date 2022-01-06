@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'game_state.dart';
-import 'consts.dart';
-import 'cube_model.dart';
-import 'enums/direction_enum.dart';
+import '../utils/game_state.dart';
+import '../utils/consts.dart';
+import '../models/cube_model.dart';
+import '../enums/direction_enum.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {

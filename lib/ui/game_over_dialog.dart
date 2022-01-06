@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../game_state.dart';
+import '../utils/game_state.dart';
 
 class GameOverDialog extends StatelessWidget {
   @override

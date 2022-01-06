@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'game_board_body.dart';
 import 'restart_button.dart';
-import '../snake_provider.dart';
+import '../providers/snake_provider.dart';
 
 class GameBoard extends StatefulWidget {
   const GameBoard({Key? key}) : super(key: key);

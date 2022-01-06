@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../cube_model.dart';
-import '../consts.dart';
+import '../models/cube_model.dart';
+import '../utils/consts.dart';
 
 class Cube extends StatelessWidget {
   final CubeModel model;

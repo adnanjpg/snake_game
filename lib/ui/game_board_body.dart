@@ -7,10 +7,10 @@ import 'package:provider/provider.dart';
 import 'game_over_dialog.dart';
 import 'game_board_background.dart';
 import '../enums/direction_enum.dart';
-import '../game_state.dart';
-import '../snake_provider.dart';
-import '../consts.dart';
-import '../cube_model.dart';
+import '../utils/game_state.dart';
+import '../providers/snake_provider.dart';
+import '../utils/consts.dart';
+import '../models/cube_model.dart';
 
 class GameBoardBody extends StatefulWidget {
   const GameBoardBody({Key? key}) : super(key: key);

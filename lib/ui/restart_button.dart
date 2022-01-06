@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../game_state.dart';
+import '../utils/game_state.dart';
 
 class RestartButton extends StatelessWidget {
   const RestartButton({Key? key}) : super(key: key);

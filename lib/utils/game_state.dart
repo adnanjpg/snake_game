@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'snake_provider.dart';
+import '../providers/snake_provider.dart';
 
 class GameState {
   static GlobalKey<NavigatorState> navKey = GlobalKey();
