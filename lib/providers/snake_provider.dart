@@ -13,7 +13,7 @@ class SnakeProvider extends ChangeNotifier {
       final querySize = MediaQuery.of(GameState.context()).size;
       final height = querySize.height;
       final width = querySize.width;
-      final _outSize = cubeSize + borderWidth * 2;
+      const _outSize = cubeSize + borderWidth * 2;
       boardSizeX = width ~/ _outSize;
       boardSizeY = height ~/ _outSize;
     }

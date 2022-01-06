@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../utils/game_state.dart';
+import '../utils/translations.dart';
 
 class GameOverDialog extends StatelessWidget {
   const GameOverDialog({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class GameOverDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('game over haha'),
+      title: Text(getStr('game_over')),
       actions: [
         ElevatedButton(
           onPressed: () {
@@ -19,7 +20,7 @@ class GameOverDialog extends StatelessWidget {
 
             GameState.restart();
           },
-          child: Text('restart??'),
+          child: Text(getStr('restart')),
         ),
       ],
     );

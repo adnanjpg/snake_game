@@ -1,6 +1,7 @@
 # snake game
 
 ## 🥺 TODO List (in order of priority)
+- host on github pages
 - touch control (for now it only works with keyboard)
 - settings menu
 - dynamic color schemes
