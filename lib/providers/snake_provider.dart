@@ -22,7 +22,13 @@ class SnakeProvider extends ChangeNotifier {
     nextDirection = initDirection;
   }
 
-  void setDirection(Direction direction) => nextDirection = direction;
+  void setDirection(Direction direction) {
+    final dif = direction.index - nextDirection.index;
+
+    final ab = dif.abs();
+
+    if (ab == 1 || ab == 3) nextDirection = direction;
+  }
 
   Direction nextDirection = initDirection;
 
