@@ -63,8 +63,20 @@ class SnakeProvider extends ChangeNotifier {
     GameState.paused = false;
   }
 
+  bool isPowerOf2(int e) {
+    return (e & (e - 1)) == 0;
+  }
+
+  int _increaseCount = 0;
+
   void addToTail() {
-    _cubes.insert(0, prevFirst);
+    // we dont wanna increase the trail in each step,
+    // so we increase it each power of 2, which is a steady increase
+    // and gets harder as the game progresses
+    if (isPowerOf2(_increaseCount)) {
+      _cubes.insert(0, prevFirst);
+      speed += 2;
+    }
   }
 
   static CubeModel prevFirst = CubeModel(0, 0, Colors.red);
