@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/game_state.dart';
 import '../utils/consts.dart';
 import '../models/cube_model.dart';
 import '../enums/direction_enum.dart';
+import 'points_provider.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
     {
-      final querySize = MediaQuery.of(GameState.context() /* TODO */).size;
+      final querySize = MediaQuery.of(GameState.context()).size;
       final height = querySize.height;
       final width = querySize.width;
       final _outSize = cubeSize + borderWidth * 2;
       boardSizeX = width ~/ _outSize;
       boardSizeY = height ~/ _outSize;
     }
+
     _cubes = [];
-    nextDirection = Direction.right;
+    nextDirection = initDirection;
   }
 
   void setDirection(Direction direction) => nextDirection = direction;
 
-  Direction nextDirection = Direction.right;
-
-  // Direction get nextDirection => _nextDirection;
+  Direction nextDirection = initDirection;
 
   List<CubeModel> _cubes = [];
   List<CubeModel> get cubes {
@@ -52,20 +53,13 @@ class SnakeProvider extends ChangeNotifier {
 
   void generateNew() {
     GameState.paused = true;
-    setDefaults();
+    GameState.setDefaults();
     for (var i = 0; i < initSnakeLen; i++) {
       _cubes.add(
         CubeModel.snake(i + 3, 5),
       );
     }
     GameState.paused = false;
-    // this method will run during build,
-    // and it will throw an error,
-    // so we safely await for the build
-    // to finish.
-    Future.microtask(() {
-      notifyListeners();
-    });
   }
 
   void add(CubeModel value) {

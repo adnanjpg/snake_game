@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../utils/game_state.dart';
 
 import 'game_board_body.dart';
 import 'restart_button.dart';
@@ -15,7 +16,8 @@ class GameBoard extends StatefulWidget {
 class _GameBoardState extends State<GameBoard> {
   @override
   void initState() {
-    Provider.of<SnakeProvider>(context, listen: false).setDefaults();
+    GameState.setDefaults();
+
     super.initState();
   }
 

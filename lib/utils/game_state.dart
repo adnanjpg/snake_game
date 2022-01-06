@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../providers/points_provider.dart';
 
 import '../providers/snake_provider.dart';
 
@@ -25,5 +26,13 @@ class GameState {
     );
 
     w.generateNew();
+  }
+
+  static void setDefaults() {
+    final snakeProv = Provider.of<SnakeProvider>(context(), listen: false);
+    snakeProv.setDefaults();
+
+    final pointProv = Provider.of<PointsProvider>(context(), listen: false);
+    pointProv.setDefaults();
   }
 }

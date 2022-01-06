@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/game_state.dart';
-import '../utils/consts.dart';
-import '../ui/cube.dart';
-import '../providers/snake_provider.dart';
 import '../enums/direction_enum.dart';
+import '../providers/snake_provider.dart';
+import '../ui/space_unit.dart';
+import '../utils/consts.dart';
+import '../utils/game_state.dart';
 
 class CubeModel {
   int x, y;
@@ -27,12 +27,16 @@ class CubeModel {
 
   CubeModel.bgCube(this.x, this.y) : color = bgCubeColor;
 
+  CubeModel.point(this.x, this.y) : color = pointColor;
+
   CubeModel.from(CubeModel other)
       : x = other.x,
         y = other.y,
         color = other.color;
 
-  Cube cube() => Cube(this);
+  Widget cube() => Cube(this);
+
+  Widget point() => ScorePoint(this);
 
   CubeModel copyWith({
     int? x,

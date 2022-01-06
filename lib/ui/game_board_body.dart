@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'game_over_dialog.dart';
-import 'game_board_background.dart';
 import '../enums/direction_enum.dart';
-import '../utils/game_state.dart';
+import '../models/cube_model.dart';
 import '../providers/snake_provider.dart';
 import '../utils/consts.dart';
-import '../models/cube_model.dart';
+import '../utils/game_state.dart';
+import 'game_board_background.dart';
+import 'game_over_dialog.dart';
+import 'points_body.dart';
 
 class GameBoardBody extends StatefulWidget {
   const GameBoardBody({Key? key}) : super(key: key);
@@ -75,14 +76,19 @@ class _GameBoardBodyState extends State<GameBoardBody> {
           autofocus: true,
           child: Stack(
             children: [
-              Container(color: dangerAreaColor),
               child!,
               ...snake(val.cubes),
             ],
           ),
         );
       },
-      child: GameBoardBackground(),
+      child: Stack(
+        children: [
+          Container(color: dangerAreaColor),
+          const GameBoardBackground(),
+          PointsBody(),
+        ],
+      ),
     );
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utils/consts.dart';
 import '../models/cube_model.dart';
+import '../utils/consts.dart';
 
 class GameBoardBackground extends StatelessWidget {
   const GameBoardBackground({Key? key}) : super(key: key);
