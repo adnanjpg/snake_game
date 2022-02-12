@@ -5,14 +5,12 @@
 - touch control (for now it only works with keyboard)
 - settings menu
 - dynamic color schemes
-- the background should be full screen 
 - translations (maybe)
 - write tests (maybe)
 - show a score and a highscore etc.
 - rebuild background on resize
 - while a key is pressed, pressing another key should change direction
 - pressing a key should make the snake move faster
-- blur background (the little space that is not covered by the blocks)
 - make the snake lose before moving out of the screen
 - add joystick support :D
 
