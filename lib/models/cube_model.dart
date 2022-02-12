@@ -65,13 +65,13 @@ class CubeModel {
         model.x++;
         break;
       case Direction.down:
-        model.y--;
+        model.y++;
         break;
       case Direction.left:
         model.x--;
         break;
       case Direction.up:
-        model.y++;
+        model.y--;
         break;
     }
 

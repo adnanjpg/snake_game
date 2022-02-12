@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'points_provider.dart';
 
-import '../utils/game_state.dart';
-import '../utils/consts.dart';
-import '../models/cube_model.dart';
 import '../enums/direction_enum.dart';
+import '../models/cube_model.dart';
+import '../utils/consts.dart';
+import '../utils/game_state.dart';
+import 'points_provider.dart';
 
 class SnakeProvider extends ChangeNotifier {
   setDefaults() {
@@ -28,6 +29,31 @@ class SnakeProvider extends ChangeNotifier {
     final ab = dif.abs();
 
     if (ab == 1 || ab == 3) nextDirection = direction;
+  }
+
+  void setDirectionByEvent(RawKeyEvent event) {
+    // this method gets called on key up and down,
+    // but we only want to work it on key down.
+    // https://stackoverflow.com/a/50986257/12555423
+    if (event.runtimeType != RawKeyDownEvent) return;
+
+    final map = {
+      // i have no idea why, but `arrowUp` and `arrowDown`
+      // each represent its exact reverse
+      [LogicalKeyboardKey.arrowDown, LogicalKeyboardKey.keyS]: Direction.down,
+      [LogicalKeyboardKey.arrowUp, LogicalKeyboardKey.keyW]: Direction.up,
+      [LogicalKeyboardKey.arrowRight, LogicalKeyboardKey.keyD]: Direction.right,
+      [LogicalKeyboardKey.arrowLeft, LogicalKeyboardKey.keyA]: Direction.left,
+    };
+
+    for (var item in map.entries) {
+      for (var key in item.key) {
+        if (!event.isKeyPressed(key)) continue;
+
+        setDirection(item.value);
+        return;
+      }
+    }
   }
 
   Direction nextDirection = initDirection;
