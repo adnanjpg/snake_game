@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../models/board_dimensions_model.dart';
 import '../providers/board_size_provider.dart';
 import '../utils/game_state.dart';
-import 'controls/controls_widgets.dart';
+import 'controls_widgets.dart';
 import 'game_board_body.dart';
 
 class GameBoard extends StatefulWidget {
@@ -36,9 +36,11 @@ class _GameBoardState extends State<GameBoard> {
         );
         return Scaffold(
           body: SafeArea(
-            child: Stack(
+            child: Row(
               children: const [
-                GameBoardBody(),
+                Expanded(
+                  child: GameBoardBody(),
+                ),
                 ControlsWidgets(),
               ],
             ),

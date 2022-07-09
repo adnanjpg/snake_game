@@ -5,6 +5,7 @@
 const translations = {
   'game_over': 'Game Over',
   'restart': 'Restart',
+  'settings': 'Settings',
 };
 
 getStr(String key) {

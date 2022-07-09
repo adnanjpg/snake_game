@@ -1,24 +1,46 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+
+import '../models/board_dimensions_model.dart';
+import '../providers/board_size_provider.dart';
+import '../utils/game_state.dart';
+import 'dart:async';
 
 import '../models/cube_model.dart';
 import '../providers/snake_provider.dart';
 import '../utils/consts.dart';
-import '../utils/game_state.dart';
 import 'game_board_background.dart';
 import 'game_over_dialog.dart';
 import 'points_body.dart';
 
-class GameBoardBody extends StatefulWidget {
+class GameBoardBody extends StatelessWidget {
   const GameBoardBody({Key? key}) : super(key: key);
 
   @override
-  _GameBoardBodyState createState() => _GameBoardBodyState();
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        SchedulerBinding.instance.addPostFrameCallback(
+          (_) {
+            Provider.of<BoardDimensionsProvider>(context, listen: false).size =
+                BoardDimensionsModel.fromConstraints(constraints);
+          },
+        );
+        return const _Body();
+      },
+    );
+  }
 }
 
-class _GameBoardBodyState extends State<GameBoardBody> {
+class _Body extends StatefulWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  __BodyState createState() => __BodyState();
+}
+
+class __BodyState extends State<_Body> {
   late SnakeProvider prov;
   @override
   void initState() {
@@ -50,19 +72,25 @@ class _GameBoardBodyState extends State<GameBoardBody> {
     super.initState();
   }
 
+  final node = FocusNode();
+  final fnode = FocusScopeNode();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SnakeProvider>(
       builder: (context, val, child) {
-        return RawKeyboardListener(
-          focusNode: FocusNode(),
-          onKey: prov.setDirectionByEvent,
-          autofocus: true,
-          child: Stack(
-            children: [
-              child!,
-              ...snake(val.cubes),
-            ],
+        return FocusScope(
+          node: fnode,
+          child: RawKeyboardListener(
+            focusNode: node,
+            onKey: prov.setDirectionByEvent,
+            autofocus: true,
+            child: Stack(
+              children: [
+                child!,
+                ...snake(val.cubes),
+              ],
+            ),
           ),
         );
       },

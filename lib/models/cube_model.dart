@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'board_dimensions_model.dart';
 
 import '../enums/direction_enum.dart';
 import '../providers/snake_provider.dart';
 import '../ui/space_unit.dart';
 import '../utils/consts.dart';
 import '../utils/game_state.dart';
+import 'board_dimensions_model.dart';
 
 class CubeModel {
   int x, y;

@@ -7,10 +7,6 @@ class BoardDimensionsModel {
 
   const BoardDimensionsModel(this.x, this.y);
 
-  BoardDimensionsModel.fromSize(Size size)
-      : x = size.width.toInt(),
-        y = size.height.toInt();
-
   factory BoardDimensionsModel.fromConstraints(BoxConstraints constraints) {
     final height = constraints.heightConstraints().maxHeight;
     final width = constraints.widthConstraints().maxWidth;

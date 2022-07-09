@@ -23,6 +23,7 @@ const Color
     snakeCubeColor = Color(0xFF9145B6),
     snakeHeadColor = Color(0xFFB958A5),
     dangerAreaColor = Color(0xFF37474F),
+    gameBgColor = dangerAreaColor,
     pointColor = Color(0xFFFF5677)
     //
     ;
