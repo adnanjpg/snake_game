@@ -27,12 +27,12 @@ enum _Controls {
     }
   }
 
-  void onPressed() {
+  void onPressed(BuildContext context) {
     switch (this) {
       case restart:
         return GameState.restart();
       case settings:
-        return SettingsManager.showSettingsDialog();
+        return SettingsManager.showSettingsDialog(context);
     }
   }
 }
@@ -84,7 +84,7 @@ class _ControlsWidgetsState extends State<ControlsWidgets> {
               color: entered ? iconThm.color : iconThm.color?.withOpacity(.4),
             ),
             onDestinationSelected: (index) {
-              _Controls.values[index].onPressed();
+              _Controls.values[index].onPressed(context);
             },
             destinations: _Controls.values
                 .map(

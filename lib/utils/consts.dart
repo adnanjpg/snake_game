@@ -15,6 +15,8 @@ const initSpeed = 30;
 const speedIncrease = 2;
 int speed = initSpeed;
 
+const defPaddingSize = 15.0;
+
 const Direction initDirection = Direction.right;
 
 const Color
