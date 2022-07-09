@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../enums/direction_enum.dart';
 import '../models/cube_model.dart';
 import '../providers/snake_provider.dart';
 import '../utils/consts.dart';
@@ -58,24 +56,7 @@ class _GameBoardBodyState extends State<GameBoardBody> {
       builder: (context, val, child) {
         return RawKeyboardListener(
           focusNode: FocusNode(),
-          onKey: (event) {
-            // this method gets called on key up and down,
-            // but we only want to work it on key down.
-            // https://stackoverflow.com/a/50986257/12555423
-            if (event.runtimeType == RawKeyDownEvent) {
-              // i have no idea why, but `arrowUp` and `arrowDown`
-              // each represent its exact reverse
-              if (event.isKeyPressed(LogicalKeyboardKey.arrowUp)) {
-                prov.setDirection(Direction.down);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowDown)) {
-                prov.setDirection(Direction.up);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowRight)) {
-                prov.setDirection(Direction.right);
-              } else if (event.isKeyPressed(LogicalKeyboardKey.arrowLeft)) {
-                prov.setDirection(Direction.left);
-              }
-            }
-          },
+          onKey: prov.setDirectionByEvent,
           autofocus: true,
           child: Stack(
             children: [

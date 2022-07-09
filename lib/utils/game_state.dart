@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/points_provider.dart';
 import '../providers/snake_provider.dart';
 
-class GameState {
+abstract class GameState {
   static GlobalKey<NavigatorState> navKey = GlobalKey();
 
   static bool paused = true;

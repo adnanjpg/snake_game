@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../enums/direction_enum.dart';
 
 const double cubeSize = 30.0;
