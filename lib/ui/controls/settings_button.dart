@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../utils/settings_manager.dart';
 
 class SettingsButton extends StatelessWidget {

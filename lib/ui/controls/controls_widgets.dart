@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'settings_button.dart';
+
 import 'restart_button.dart';
+import 'settings_button.dart';
 
 class ControlsWidgets extends StatelessWidget {
   const ControlsWidgets({Key? key}) : super(key: key);
