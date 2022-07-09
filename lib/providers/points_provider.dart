@@ -2,10 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../models/board_dimensions_model.dart';
 import '../models/cube_model.dart';
 import '../utils/consts.dart';
 
 class PointsProvider extends ChangeNotifier {
+  final BuildContext context;
+
+  BoardDimensionsModel dimension;
+
+  PointsProvider({
+    required this.context,
+    required this.dimension,
+  });
+
+  void setDimension(BoardDimensionsModel dimension) {
+    this.dimension = dimension;
+  }
+
   final List<CubeModel> _list = [];
 
   void setDefaults() {
@@ -33,7 +47,7 @@ class PointsProvider extends ChangeNotifier {
   void addRandom() {
     final random = Random.secure();
 
-    var ranX = random.nextInt(boardSizeX), ranY = random.nextInt(boardSizeY);
+    var ranX = random.nextInt(dimension.x), ranY = random.nextInt(dimension.y);
 
     if (_list.any((element) => element.x == ranX && element.y == ranY)) {
       // keep recursing until we find a valid position

@@ -8,7 +8,6 @@
 - translations (maybe)
 - write tests (maybe)
 - show a score and a highscore etc.
-- rebuild background on resize
 - while a key is pressed, pressing another key should change direction
 - pressing a key should make the snake move faster
 - if the snake will lose in this move, do not let the user see it out of the screen (crashing animation)
@@ -20,3 +19,4 @@
 - fix restart
 - init lints
 - controls using w a s d
+- rebuild background on resize

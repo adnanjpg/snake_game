@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'board_dimensions_model.dart';
 
 import '../enums/direction_enum.dart';
 import '../providers/snake_provider.dart';
@@ -51,10 +52,11 @@ class CubeModel {
     color = other.color;
   }
 
-  bool get _isOutOfBoundsX => x.isNegative || x >= boardSizeX;
-  bool get _isOutOfBoundsY => y.isNegative || y >= boardSizeY;
+  bool _isOutOfBoundsX(int sizeX) => x.isNegative || x >= sizeX;
+  bool _isOutOfBoundsY(int sizeY) => y.isNegative || y >= sizeY;
 
-  bool get isOutOfBounds => _isOutOfBoundsX || _isOutOfBoundsY;
+  bool isOutOfBounds(BoardDimensionsModel dim) =>
+      _isOutOfBoundsX(dim.x) || _isOutOfBoundsY(dim.y);
 
   static CubeModel afterMove(
     CubeModel model,

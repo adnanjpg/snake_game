@@ -11,8 +11,6 @@ const pointCount = 5;
 
 const snakeInitX = 3, snakeInitY = 5;
 
-int boardSizeX = 12, boardSizeY = 12;
-
 const initSpeed = 30;
 const speedIncrease = 2;
 int speed = initSpeed;

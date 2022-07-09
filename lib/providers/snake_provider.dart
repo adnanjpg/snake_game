@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../models/board_dimensions_model.dart';
 
 import '../enums/direction_enum.dart';
 import '../models/cube_model.dart';
@@ -9,16 +10,19 @@ import '../utils/game_state.dart';
 import 'points_provider.dart';
 
 class SnakeProvider extends ChangeNotifier {
-  setDefaults() {
-    {
-      final querySize = MediaQuery.of(GameState.context()).size;
-      final height = querySize.height;
-      final width = querySize.width;
-      const _outSize = cubeSize + borderWidth * 2;
-      boardSizeX = width ~/ _outSize;
-      boardSizeY = height ~/ _outSize;
-    }
+  final BuildContext context;
+  BoardDimensionsModel dimension;
 
+  SnakeProvider({
+    required this.context,
+    required this.dimension,
+  });
+
+  void setDimension(BoardDimensionsModel dimension) {
+    this.dimension = dimension;
+  }
+
+  void setDefaults() {
     _cubes = [];
     _increaseCount = 0;
     speed = initSpeed;
@@ -79,12 +83,12 @@ class SnakeProvider extends ChangeNotifier {
     return false;
   }
 
-  bool get gameOver => eatingItsTail || _cubes.last.isOutOfBounds;
+  bool get gameOver => eatingItsTail || _cubes.last.isOutOfBounds(dimension);
 
-  bool gonFallOffEdge(Direction dir) {
-    CubeModel mod = CubeModel.afterMove(CubeModel.from(_cubes.last), dir);
-    return mod.isOutOfBounds;
-  }
+  // bool gonFallOffEdge(Direction dir) {
+  //   CubeModel mod = CubeModel.afterMove(CubeModel.from(_cubes.last), dir);
+  //   return mod.isOutOfBounds;
+  // }
 
   void generateNew() {
     GameState.paused = true;
